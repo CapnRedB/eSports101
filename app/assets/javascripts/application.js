@@ -18,6 +18,7 @@ $( document ).ready( function() {
 	$( '#t1Mid' ).on( 'click', function() {
 		var newDiv = $( '#t1Mid' ).clone();
 		$( '.gameDeck' ).append( newDiv );
+		var fillSpace = $( '#t1Top' );
 		newDiv.css( 'background-color', 'green' );
 		newDiv.css( 'position', 'absolute' );
 		var position = $( '#t1Mid' ).position();
@@ -26,9 +27,9 @@ $( document ).ready( function() {
 		newDiv.css( 'top', position.top );
 		newDiv.css( 'z-index', 10 );
 		newDiv.animate( {
-			left: '40px',
-			top: '0',
-			height: '200px'
+			left: fillSpace.position().left + "px",
+			height: '200px',
+			width: '1024px'
 		}, 1000 );
 	} )
 } )
