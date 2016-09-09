@@ -14,3 +14,21 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$( document ).ready( function() {
+	$( '#t1Mid' ).on( 'click', function() {
+		var newDiv = $( '#t1Mid' ).clone();
+		$( '.gameDeck' ).append( newDiv );
+		newDiv.css( 'background-color', 'green' );
+		newDiv.css( 'position', 'absolute' );
+		var position = $( '#t1Mid' ).position();
+		//console.log( position );
+		newDiv.css( 'left', position.left );
+		newDiv.css( 'top', position.top );
+		newDiv.css( 'z-index', 10 );
+		newDiv.animate( {
+			left: '40px',
+			top: '0',
+			height: '200px'
+		}, 1000 );
+	} )
+} )
