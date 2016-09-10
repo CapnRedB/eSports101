@@ -14,22 +14,31 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-$( document ).ready( function() {
-	$( '#t1Mid' ).on( 'click', function() {
-		var newDiv = $( '#t1Mid' ).clone();
+var toolTip = false;
+$( document ).ready( function( e ) {
+	$( '.gameNode1' ).on( 'click', function( e ) {
+
+		var newDiv = $( event.target ).clone();
+		newDiv.addClass( 'toolTip' );
+		newDiv.attr( 'id', 'toolTip' );
 		$( '.gameDeck' ).append( newDiv );
 		var fillSpace = $( '#t1Top' );
 		newDiv.css( 'background-color', 'green' );
 		newDiv.css( 'position', 'absolute' );
-		var position = $( '#t1Mid' ).position();
+		var position = $( event.target ).position();
 		//console.log( position );
 		newDiv.css( 'left', position.left );
 		newDiv.css( 'top', position.top );
-		newDiv.css( 'z-index', 10 );
+		newDiv.css( 'z-index', 1 );
 		newDiv.animate( {
 			left: fillSpace.position().left + "px",
 			height: '200px',
 			width: '1024px'
 		}, 1000 );
+	} );
+
+	$( '.gameDeck' ).mouseleave( function() {
+		$( '#toolTip' ).remove();
 	} )
+
 } )
