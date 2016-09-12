@@ -1,39 +1,44 @@
 // Place all the styles related to the learn controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 h1{
 	color: red;
 }
 
 .learnDeck{
+
 	background-color: #656565;
-	width: 150px;
+	width: 100%;
 	height: 90px;
 	border: black solid 1px;
 }
 .gameNode1{
-	background-color: #08415C;
 	border: black solid 1px;
+	background-color: #08415C;
+	background-repeat: no-repeat;
 	height: 100px;
-	width: 204.6px;
+	width: 20%;
 
 }
 .gameNode2{
-	background-color: #A44A3F;
 	border: black solid 1px;
+	background-color: #A44A3F;
 	height: 100px;
-	width: 204.6px;
-
+	width: 20%;
 }
 
+.videoCon{
+
+}
 .logo{
-	margin-left: 50px;
 	max-width: 100px;
 	max-height: 100px;
 }
 iframe{
-	border-color: #343434;
+	border-color: black;
+
 }
-.toolTip{
-	
+#toolTipText{
+	border: red solid 1px;
 }

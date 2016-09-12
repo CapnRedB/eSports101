@@ -14,9 +14,20 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+var t1Champs = [ 'Gangplank', 'Gragas', 'Syndra', 'Sivir', 'Braum' ];
+var t2Champs = [ 'Riven', 'RekSai', 'Leblanc', 'Jhin', 'Trundle' ];
 var toolTip = false;
 $( document ).ready( function( e ) {
-
+	$( '#t1Top' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t1Champs[ 0 ] + '.png ) 0 0/100% 100% no-repeat' );
+	$( '#t1Jung' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t1Champs[ 1 ] + '.png ) 0 0/100% 100%' );
+	$( '#t1Mid' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t1Champs[ 2 ] + '.png ) 0 0/100% 100%' );
+	$( '#t1AD' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t1Champs[ 3 ] + '.png ) 0 0/100% 100%' );
+	$( '#t1Sup' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t1Champs[ 4 ] + '.png ) 0 0/100% 100%' );
+	$( '#t2Top' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t2Champs[ 0 ] + '.png ) 0 0/100% 100% no-repeat' );
+	$( '#t2Jung' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t2Champs[ 1 ] + '.png ) 0 0/100% 100%' );
+	$( '#t2Mid' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t2Champs[ 2 ] + '.png ) 0 0/100% 100%' );
+	$( '#t2AD' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t2Champs[ 3 ] + '.png ) 0 0/100% 100%' );
+	$( '#t2Sup' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t2Champs[ 4 ] + '.png ) 0 0/100% 100%' );
 	event.preventDefault();
 	$( '.gameDeck' ).on( 'click', function( e ) {
 		if ( $( event.target ).hasClass( 'gameNode2' ) || $( event.target ).hasClass( 'gameNode1' ) ) {
@@ -28,7 +39,12 @@ $( document ).ready( function( e ) {
 				newDiv.attr( 'id', 'toolTip' );
 				$( '.gameDeck' ).append( newDiv );
 				var fillSpace = $( '#t1Top' );
-				newDiv.css( 'background-color', 'green' );
+				if ( $( event.target ).hasClass( 'gameNode2' ) ) {
+					newDiv.css( 'background', '#A44A3F' );
+				}
+				if ( $( event.target ).hasClass( 'gameNode1' ) ) {
+					newDiv.css( 'background', '#08415C' );
+				}
 				newDiv.css( 'position', 'absolute' );
 				var position = $( event.target ).position();
 				//console.log( position );
@@ -39,7 +55,7 @@ $( document ).ready( function( e ) {
 					left: fillSpace.position().left + "px",
 					top: fillSpace.position().top + "px",
 					height: '200px',
-					width: '1024px'
+					width: $( '.gameDeck' ).width()
 				}, 1000 );
 			}
 		}
