@@ -16,28 +16,32 @@
 //= require_tree .
 var toolTip = false;
 $( document ).ready( function( e ) {
+
+	event.preventDefault();
 	$( '.gameDeck' ).on( 'click', function( e ) {
-		if ( !toolTip ) {
-			toolTip = true;
-			console.log( "expand" );
-			var newDiv = $( event.target ).clone();
-			newDiv.addClass( 'toolTip' );
-			newDiv.attr( 'id', 'toolTip' );
-			$( '.gameDeck' ).append( newDiv );
-			var fillSpace = $( '#t1Top' );
-			newDiv.css( 'background-color', 'green' );
-			newDiv.css( 'position', 'absolute' );
-			var position = $( event.target ).position();
-			//console.log( position );
-			newDiv.css( 'left', position.left );
-			newDiv.css( 'top', position.top );
-			newDiv.css( 'z-index', 1 );
-			newDiv.animate( {
-				left: fillSpace.position().left + "px",
-				top: fillSpace.position().top + "px",
-				height: '200px',
-				width: '1024px'
-			}, 1000 );
+		if ( $( event.target ).hasClass( 'gameNode2' ) || $( event.target ).hasClass( 'gameNode1' ) ) {
+			if ( !toolTip ) {
+				toolTip = true;
+				console.log( "expand" );
+				var newDiv = $( event.target ).clone();
+				newDiv.addClass( 'toolTip' );
+				newDiv.attr( 'id', 'toolTip' );
+				$( '.gameDeck' ).append( newDiv );
+				var fillSpace = $( '#t1Top' );
+				newDiv.css( 'background-color', 'green' );
+				newDiv.css( 'position', 'absolute' );
+				var position = $( event.target ).position();
+				//console.log( position );
+				newDiv.css( 'left', position.left );
+				newDiv.css( 'top', position.top );
+				newDiv.css( 'z-index', 1 );
+				newDiv.animate( {
+					left: fillSpace.position().left + "px",
+					top: fillSpace.position().top + "px",
+					height: '200px',
+					width: '1024px'
+				}, 1000 );
+			}
 		}
 	} );
 
