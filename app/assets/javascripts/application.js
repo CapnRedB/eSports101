@@ -17,6 +17,41 @@
 var t1Champs = [ 'Gangplank', 'Gragas', 'Syndra', 'Sivir', 'Braum' ];
 var t2Champs = [ 'Riven', 'RekSai', 'Leblanc', 'Jhin', 'Trundle' ];
 var toolTip = false;
+var tag = document.createElement( 'script' );
+tag.id = 'iframe-demo';
+tag.src = 'https://www.youtube.com/iframe_api';
+var firstScriptTag = document.getElementsByTagName( 'script' )[ 0 ];
+firstScriptTag.parentNode.insertBefore( tag, firstScriptTag );
+
+var player;
+
+function onYouTubeIframeAPIReady() {
+	player = new YT.Player( 'video', {
+		events: {
+			'onReady': onPlayerReady,
+			'onStateChange': onPlayerStateChange
+		}
+	} );
+}
+
+function onPlayerReady( event ) {
+	console.log( player.getCurrentTime() );
+}
+
+
+var myTimer;
+
+function onPlayerStateChange( event ) {
+	if ( event.data === 1 ) {
+		myTimer = setInterval( function() {
+			var time = player.getCurrentTime();
+			console.log( time );
+		}, 1000 )
+	} else {
+		clearInterval( myTimer );
+	}
+}
+
 $( document ).ready( function( e ) {
 	$( '#t1Top' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t1Champs[ 0 ] + '.png ) 0 0/100% 100% no-repeat' );
 	$( '#t1Jung' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/6.4.1/img/champion/' + t1Champs[ 1 ] + '.png ) 0 0/100% 100%' );
@@ -32,8 +67,6 @@ $( document ).ready( function( e ) {
 	$( '.gameDeck' ).on( 'click', function( e ) {
 		if ( $( event.target ).hasClass( 'gameNode2' ) || $( event.target ).hasClass( 'gameNode1' ) ) {
 			if ( !toolTip ) {
-				toolTip = true;
-				console.log( "expand" );
 				var newDiv = $( event.target ).clone();
 				newDiv.addClass( 'toolTip' );
 				newDiv.attr( 'id', 'toolTip' );
@@ -65,5 +98,4 @@ $( document ).ready( function( e ) {
 		$( '#toolTip' ).remove();
 		toolTip = false;
 	} )
-
 } )
