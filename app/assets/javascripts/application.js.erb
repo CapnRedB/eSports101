@@ -1,0 +1,150 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts	,
+// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file. JavaScript code in this file should be added after the last require_* statement.
+//
+// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+// about supported directives.
+//
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require_tree .
+var t1Champs = [ 'Gangplank', 'Gragas', 'Syndra', 'Sivir', 'Braum' ];
+var version;
+var t1ChampKeys = [ 41, 79, 134, 15, 201 ];
+var t2Champs = [ 'Riven', 'RekSai', 'Leblanc', 'Jhin', 'Trundle' ];
+var t2ChampKeys = [ 92, 421, 7, 202, 48 ];
+var gameChamps = {
+	'Gangplank': 41,
+	'Gragas': 79,
+	'Syndra': 134,
+	'Sivir': 15,
+	'Braum': 201,
+	'Riven': 92,
+	'RekSai': 421,
+	'Leblanc': 7,
+	'Jhin': 202,
+	'Trundle': 48
+}
+var toolTipTimes = [ 504, 588, 655, 680, 710, 749, 774, 893, 899, 936, 1192, 1258, 1428, 1755, 1849, 1894, 1928, 2183, 2323, 2357, 2446, 2459, 2621, 2808 ];
+var toolTip = false;
+var tag = document.createElement( 'script' );
+tag.id = 'iframe-demo';
+tag.src = 'https://www.youtube.com/iframe_api';
+var firstScriptTag = document.getElementsByTagName( 'script' )[ 0 ];
+firstScriptTag.parentNode.insertBefore( tag, firstScriptTag );
+var player;
+
+function onYouTubeIframeAPIReady() {
+	player = new YT.Player( 'video', {
+		events: {
+			'onReady': onPlayerReady,
+			'onStateChange': onPlayerStateChange
+		}
+	} );
+}
+
+function onPlayerReady( event ) {
+	console.log( player.getCurrentTime() );
+}
+
+
+var myTimer;
+var time;
+
+function checkToolTipTime() {
+
+}
+
+function onPlayerStateChange( event ) {
+	if ( event.data === 1 ) {
+		myTimer = setInterval( function() {
+			time = player.getCurrentTime();
+		}, 250 )
+	} else {
+		clearInterval( myTimer ); //Stop checking the time if the video isn't playing
+	}
+}
+
+$( document ).ready( function( e ) {
+	//Get tooltipTimes Hopefully will be deprecated soon.
+	$( document ).on( 'keyup', function( e ) {
+		if ( String.fromCharCode( e.keyCode ) === 'T' ) {
+			toolTipTimes.push( time );
+		} else if ( String.fromCharCode( e.keyCode ) === ' ' ) {
+			console.log( toolTipTimes );
+		}
+	} )
+	$.ajax( {
+		url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=<%=ENV[ "RIOT_API_KEY" ]%>'  ,
+		success: function( result ) {
+			version = result[ 0 ];
+			console.log( version );
+		}
+	} ).done( function() {
+		$( '#t1Top' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + t1Champs[ 0 ] + '.png ) 0 0/100% 100% no-repeat' );
+		$( '#t1Jung' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + t1Champs[ 1 ] + '.png ) 0 0/100% 100%' );
+		$( '#t1Mid' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + t1Champs[ 2 ] + '.png ) 0 0/100% 100%' );
+		$( '#t1AD' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + t1Champs[ 3 ] + '.png ) 0 0/100% 100%' );
+		$( '#t1Sup' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + t1Champs[ 4 ] + '.png ) 0 0/100% 100%' );
+		$( '#t2Top' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + t2Champs[ 0 ] + '.png ) 0 0/100% 100% no-repeat' );
+		$( '#t2Jung' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + t2Champs[ 1 ] + '.png ) 0 0/100% 100%' );
+		$( '#t2Mid' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + t2Champs[ 2 ] + '.png ) 0 0/100% 100%' );
+		$( '#t2AD' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + t2Champs[ 3 ] + '.png ) 0 0/100% 100%' );
+		$( '#t2Sup' ).css( 'background', 'url(http://ddragon.leagueoflegends.com/cdn/' + version + '/img/champion/' + t2Champs[ 4 ] + '.png ) 0 0/100% 100%' );
+	} )
+	event.preventDefault();
+	$( '.gameDeck' ).on( 'click', function( e ) {
+		if ( $( event.target ).hasClass( 'gameNode2' ) || $( event.target ).hasClass( 'gameNode1' ) ) {
+			if ( !toolTip ) {
+				toolTip = true;
+				var newDiv = $( event.target ).clone();
+				newDiv.addClass( 'toolTip' );
+				newDiv.attr( 'id', 'toolTip' );
+				$( '.gameDeck' ).append( newDiv );
+				var fillSpace = $( '#t1Top' );
+				var champClick = newDiv.css( 'background-image' );
+				champClick = champClick.replace( 'url(', '' ).replace( ')', '' ).replace( /\"/gi, "" ).replace( '.png', '' );
+				champClick = champClick.split( '/' );
+				champClick = champClick[ champClick.length - 1 ];
+				console.log( champClick );
+				var id = gameChamps[ champClick ];
+				$.ajax( {
+					url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + id + '?champData=image,passive,spells&api_key=<%=ENV[ "RIOT_API_KEY" ]%>',
+					success: function( result ) {
+						console.log( result );
+					}
+				} )
+				if ( $( event.target ).hasClass( 'gameNode2' ) ) {
+					newDiv.css( 'background', '#A44A3F' );
+				}
+				if ( $( event.target ).hasClass( 'gameNode1' ) ) {
+					newDiv.css( 'background', '#08415C' );
+				}
+				newDiv.css( 'position', 'absolute' );
+				var position = $( event.target ).position();
+				//console.log( position );
+				newDiv.css( 'left', position.left );
+				newDiv.css( 'top', position.top );
+				newDiv.css( 'z-index', 1 );
+				newDiv.animate( {
+					left: fillSpace.position().left + "px",
+					top: fillSpace.position().top + "px",
+					height: '200px',
+					width: $( '.gameDeck' ).width()
+				}, 1000 );
+
+			}
+		}
+	} );
+
+	$( '.gameDeck' ).mouseleave( function() {
+		$( '#toolTip' ).remove();
+		toolTip = false;
+	} )
+} )

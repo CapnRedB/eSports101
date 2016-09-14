@@ -81,5 +81,9 @@ test:
 production:
   <<: *default
   database: eSports101_production
+
+
+
+
   username: eSports101
   password: <%= ENV['ESPORTS101_DATABASE_PASSWORD'] %>
