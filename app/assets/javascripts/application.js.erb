@@ -116,35 +116,6 @@ $( document ).ready( function( e ) {
 				var id = gameChamps[ champClick ];
 				$.ajax( {
 					url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + id + '?champData=image,passive,spells&api_key=<%=	ENV[ "RIOT_API_KEY" ]%>',
-					// success: function( result ) {
-					// 	// console.log(result);
-					// 	// newDiv.text(result.name);
-					// 	// var row = $('<div></div>')
-					// 	// var passive = row.clone();
-					// 	// row.addClass('row-centered');
-					// 	// passive.addClass('col-sm-2');
-					// 	// passive.addClass('col-centered');
-					// 	// var spell0 = passive.clone();
-					// 	// var spell1 = passive.clone();
-					// 	// var spell2 = passive.clone();
-					// 	// var spell3 = passive.clone();
-					// 	// var spellDiv=[spell0, spell1, spell2, spell3];
-					// 	// passive.append($('<img>', {id:'passive', src:'http://ddragon.leagueoflegends.com/cdn/6.4.1/img/passive/'+result.passive.image.full}).addClass('spell'));
-					// 	// for(var i=0; i<spellDiv.length; i++){
-					// 	// 	spellDiv[i].append($('<img>', {id:'spell'+i, src:'http://ddragon.leagueoflegends.com/cdn/6.4.1/img/spell/'+result.spells[i].image.full}).addClass('spell'));
-					// 	// }
-					// 	// row.addClass('row');
-					// 	// var spellDescRow = row.clone();
-					// 	// spellDescRow.addClass('spellDesc');
-					// 	// spellDescRow.css('height','100px');
-					// 	// row.append(passive);
-					// 	// row.append(spell0);
-					// 	// row.append(spell1);
-					// 	// row.append(spell2);
-					// 	// row.append(spell3);
-					// 	// newDiv.append(row);
-					// 	// newDiv.append(spellDescRow);
-					// }
 				} ).done(function(result){ //For the love of god put this in a helper function
 					console.log(result);
 					newDiv.text(result.name);
@@ -173,8 +144,18 @@ $( document ).ready( function( e ) {
 					row.append(spell3);
 					newDiv.append(row);
 					newDiv.append(spellDescRow);
+					newDiv.css('color','white');
 					$('.spell').mouseenter(function(){
-						console.log('NAJSKDNGJKASNJKGNASKJ');
+						if($(event.target).attr('id')==='passive'){
+							spellDescRow.append($('<p>'+result.passive.name+'</br>'+result.passive.description+'</p>'))
+						}else{
+							var index=parseInt($(this).attr('id').charAt(5))
+							spellDescRow.append($('<p>'+result.spells[index].name+'</br>'+result.spells[index].description+'</p>'))
+						}
+						console.log(parseInt($(this).attr('id').charAt(5)));
+					})
+					$('.spell').mouseleave(function(){
+						spellDescRow.text('');
 					})
 				})
 				if ( $( event.target ).hasClass( 'gameNode2' ) ) {
