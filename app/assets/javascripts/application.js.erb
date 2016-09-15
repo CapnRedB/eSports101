@@ -115,9 +115,33 @@ $( document ).ready( function( e ) {
 				console.log( champClick );
 				var id = gameChamps[ champClick ];
 				$.ajax( {
-					url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + id + '?champData=image,passive,spells&api_key=<%=ENV[ "RIOT_API_KEY" ]%>',
+					url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + id + '?champData=image,passive,spells&api_key=<%=	ENV[ "RIOT_API_KEY" ]%>',
 					success: function( result ) {
-						console.log( result );
+						console.log(result);
+						newDiv.text(result.name);
+						var row = $('<div></div>')
+						var passive = row.clone();
+						row.addClass('row-centered');
+						passive.addClass('col-sm-2');
+						passive.addClass('col-centered');
+						passive.addClass('spell');
+						var spell0 = passive.clone();
+						var spell1 = passive.clone();
+						var spell2 = passive.clone();
+						var spell3 = passive.clone();
+						var spellDiv=[spell0, spell1, spell2, spell3];
+						passive.append($('<img>', {id:'passive', src:'http://ddragon.leagueoflegends.com/cdn/6.4.1/img/passive/'+result.passive.image.full}));
+						for(var i=0; i<spellDiv.length; i++){
+							spellDiv[i].append($('<img>', {id:'spell'+i, src:'http://ddragon.leagueoflegends.com/cdn/6.4.1/img/spell/'+result.spells[i].image.full}));
+						}
+						row.addClass('row');
+						row.append(passive);
+						row.append(spell0);
+						row.append(spell1);
+						row.append(spell2);
+						row.append(spell3);
+						newDiv.append(row);
+
 					}
 				} )
 				if ( $( event.target ).hasClass( 'gameNode2' ) ) {
