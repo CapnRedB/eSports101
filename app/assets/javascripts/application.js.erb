@@ -103,7 +103,7 @@ $( document ).ready( function( e ) {
 		}
 	} )
 	$.ajax( {
-		url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key='+blah  ,
+		url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=<%=ENV[ "RIOT_API_KEY" ]%>'  ,
 		success: function( result ) {
 			version = result[ 0 ];
 			console.log( version );
@@ -197,7 +197,7 @@ $( document ).ready( function( e ) {
 					top: fillSpace.position().top + "px",
 					height: '200px',
 					width: $( '.gameDeck' ).width()
-				}, 1000 );
+				}, 500 );
 			}
 		}
 	} );
