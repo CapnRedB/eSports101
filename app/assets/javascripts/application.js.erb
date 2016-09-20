@@ -34,7 +34,7 @@ var gameChamps = {
 }
 var toolTipTimes = [504, 508, 512];
 //[ 504, 588, 655, 680, 710, 749, 774, 893, 899, 936, 1192, 1258, 1428, 1755, 1849, 1894, 1928, 2183, 2323, 2357, 2446, 2459, 2621, 2808 ];
- var toolTips = [{"tool":"snowball","tip":"gaining and extending a lead until the enemy team cannot stop it. Like a snowball rolling down a mountain"},{"tool":"summoner spell","tip":"pool of spells that all players can use two of that have nothing to do with the character played. Flash- teleport a small distance away instantly Exhaust - slow and lower damage of one enemy Ghost - Move faster and through other units Teleport - After 4 seconds, teleport to any tower, allied minion, or ward Ignite - Reduce effectiveness of healing and deal damage over time"},{"tool":"buffs","tip":"Bonuses given to a character for a duration. Are lost upon death. Blue buff - Allows characters to use their spells more frequently. Red buff - Allows characters to slow and burn enemies they attack Baron Buff - Allows all teammates to gain power and apply power to nearby minions"}];
+ var toolTips = [{"tool":"snowball","tip":"gaining and extending a lead until the enemy team cannot stop it. Like a snowball rolling down a mountain"},{"tool":"summoner spell","tip":"pool of spells that all players can use two of that have nothing to do with the character played. <br/> Flash- teleport a small distance away instantly <br/>Exhaust - slow and lower damage of one enemy <br/>Ghost - Move faster and through other units <br/> <strong>Teleport</strong> - After 4 seconds, teleport to any tower, allied minion, or ward <br/>Ignite - Reduce effectiveness of healing and deal damage over time"},{"tool":"buffs","tip":"Bonuses given to a character for a duration. Are lost upon death. <br/> Blue buff - Allows characters to use their spells more frequently. <br/> Red buff - Allows characters to slow and burn enemies they attack <br/> Baron Buff - Allows all teammates to gain power and apply power to nearby minions"}];
  // var desc=["gaining and extending a lead until the enemy team cannot stop it. Like a snowball rolling down a mountain","pool of spells that all players can use two of that have nothing to do with the character played. Flash- teleport a small distance away instantly Exhaust - slow and lower damage of one enemy Ghost - Move faster and through other units Teleport - After 4 seconds, teleport to any tower, allied minion, or ward Ignite - Reduce effectiveness of healing and deal damage over time","Bonuses given to a character for a duration. Are lost upon death. Blue buff - Allows characters to use their spells more frequently. Red buff - Allows characters to slow and burn enemies they attack Baron Buff - Allows all teammates to gain power and apply power to nearby minions", "A small trinket that reveals a location on the map for you and your teammates.", "Start of the game, normal positions of 1 in the top side, 1 in the middle, 2 in the bottom and 1 in the jungle.","Score given to players when they deal the finishing blow to a minion. The higher the score, the more gold and more power they have. Perfect cs at 20 minutes is about 200","Dealing the finishing blow","The teleport summoner spell","leaving normal position to go and help a teammate their normal position.","Strongest ability the character has.","Objective that gives extra power to one character for a massive duration when slain.","A pack of minions","In match currency used to buy items that give more strength to characters. Usually the team with more ends up winning. Gold is gained over time and when destroying anything of the enemy’s on the map.","Objective that give a permanent power boost to the team that slays it.","Objects that grant power and gold to the entire team instead of just one player. For example: Towers, Drakes, Inhibitors and Baron","Cooldown Reduction: Allows for players to use their abilities more frequently.","One of the most powerful objectives in the game, teams who take this have a massive advantage for the next five minutes.","Known as 'GA' Revives a champion after he or she dies","When a jungler goes to a lane and attacks the enemy champion with the ally already there","Area of Effect: Abilities that target an area instead of one target","An objective that gives the team that destroys it a massive advantage, usually the first team to take one, ends up winning the game.","1/3/1 - 1 in the top lane, 3 in the middle lane, 1 in the bottom lane. A formation teams usually take to push their advantage.", "A massive amount of damage in a short time","Crowd Control: impairing the movement of enemy characters","Bigger and stronger minions that spawn when an inhibitor is destroyed","Ignoring all objectives and enemy players in order to try and end the game by taking the enemy base (Nexus)."]
 var toolTip = false;
 var tag = document.createElement( 'script' );
@@ -65,19 +65,26 @@ function checkToolTipTime(time) {
 	if(toolTipTimes.includes(time)){
 		toolsOnDeck--;
 		var toolIndex = toolTipTimes.indexOf(time);
-		var tip=$('<div>').css('background-color', 'red')
+		var tip=$('<div>').css('background-color', '#08415C');
+		var text=$('<p>').addClass('valign');
+		tip.addClass('row-centered');
+		tip.append(text);
+		tip.css('color', 'white');
 		tip.css('border','black solid 1px');
 		tip.css('height','90px');
 		tip.click(function(index){
 			console.log(toolIndex);
 			console.log(toolTips);
 			$('#toolTipText').css('color','white');
-			$('#toolTipText').text(toolTips[toolIndex].tip);
+			$('#toolTipText').html(toolTips[toolIndex].tip);
 
 		})
 			$('.learn').prepend(tip)
-			console.log(toolTips);
-		tip.text(toolTips[toolIndex].tool);
+		text.html(toolTips[toolIndex].tool);
+		var numTips = $('.learn').children().length
+		if(numTips>8){
+			$('.learn').children().last().remove();
+		}
 
 	}
 }
@@ -103,7 +110,7 @@ $( document ).ready( function( e ) {
 		}
 	} )
 	$.ajax( {
-		url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=<%=ENV[ "RIOT_API_KEY" ]%>'  ,
+		url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=RGAPI-16CCAB70-AECB-4D8D-ADFB-CA39DFE5747E'  ,
 		success: function( result ) {
 			version = result[ 0 ];
 			console.log( version );
@@ -137,7 +144,7 @@ $( document ).ready( function( e ) {
 				console.log( champClick );
 				var id = gameChamps[ champClick ];
 				$.ajax( {
-					url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + id + '?champData=image,passive,spells&api_key=<%=	ENV[ "RIOT_API_KEY" ]%>',
+					url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + id + '?champData=image,passive,spells&api_key=RGAPI-16CCAB70-AECB-4D8D-ADFB-CA39DFE5747E',
 				} ).done(function(result){ //For the love of god put this in a helper function
 					console.log(result);
 					newDiv.text(result.name);
