@@ -16,7 +16,7 @@
 //= require_tree .
 var t1Champs = [ 'Gangplank', 'Gragas', 'Syndra', 'Sivir', 'Braum' ];
 var version;
-var toolsOnDeck=9;
+var toolsOnDeck = 9;
 var t1ChampKeys = [ 41, 79, 134, 15, 201 ];
 var t2Champs = [ 'Riven', 'RekSai', 'Leblanc', 'Jhin', 'Trundle' ];
 var t2ChampKeys = [ 92, 421, 7, 202, 48 ];
@@ -32,10 +32,19 @@ var gameChamps = {
 	'Jhin': 202,
 	'Trundle': 48
 }
-var toolTipTimes = [504, 508, 512];
+var toolTipTimes = [ 504, 508, 512 ];
 //[ 504, 588, 655, 680, 710, 749, 774, 893, 899, 936, 1192, 1258, 1428, 1755, 1849, 1894, 1928, 2183, 2323, 2357, 2446, 2459, 2621, 2808 ];
- var toolTips = [{"tool":"snowball","tip":"gaining and extending a lead until the enemy team cannot stop it. Like a snowball rolling down a mountain"},{"tool":"summoner spell","tip":"pool of spells that all players can use two of that have nothing to do with the character played. <br/> Flash- teleport a small distance away instantly <br/>Exhaust - slow and lower damage of one enemy <br/>Ghost - Move faster and through other units <br/> <strong>Teleport</strong> - After 4 seconds, teleport to any tower, allied minion, or ward <br/>Ignite - Reduce effectiveness of healing and deal damage over time"},{"tool":"buffs","tip":"Bonuses given to a character for a duration. Are lost upon death. <br/> Blue buff - Allows characters to use their spells more frequently. <br/> Red buff - Allows characters to slow and burn enemies they attack <br/> Baron Buff - Allows all teammates to gain power and apply power to nearby minions"}];
- // var desc=["gaining and extending a lead until the enemy team cannot stop it. Like a snowball rolling down a mountain","pool of spells that all players can use two of that have nothing to do with the character played. Flash- teleport a small distance away instantly Exhaust - slow and lower damage of one enemy Ghost - Move faster and through other units Teleport - After 4 seconds, teleport to any tower, allied minion, or ward Ignite - Reduce effectiveness of healing and deal damage over time","Bonuses given to a character for a duration. Are lost upon death. Blue buff - Allows characters to use their spells more frequently. Red buff - Allows characters to slow and burn enemies they attack Baron Buff - Allows all teammates to gain power and apply power to nearby minions", "A small trinket that reveals a location on the map for you and your teammates.", "Start of the game, normal positions of 1 in the top side, 1 in the middle, 2 in the bottom and 1 in the jungle.","Score given to players when they deal the finishing blow to a minion. The higher the score, the more gold and more power they have. Perfect cs at 20 minutes is about 200","Dealing the finishing blow","The teleport summoner spell","leaving normal position to go and help a teammate their normal position.","Strongest ability the character has.","Objective that gives extra power to one character for a massive duration when slain.","A pack of minions","In match currency used to buy items that give more strength to characters. Usually the team with more ends up winning. Gold is gained over time and when destroying anything of the enemy’s on the map.","Objective that give a permanent power boost to the team that slays it.","Objects that grant power and gold to the entire team instead of just one player. For example: Towers, Drakes, Inhibitors and Baron","Cooldown Reduction: Allows for players to use their abilities more frequently.","One of the most powerful objectives in the game, teams who take this have a massive advantage for the next five minutes.","Known as 'GA' Revives a champion after he or she dies","When a jungler goes to a lane and attacks the enemy champion with the ally already there","Area of Effect: Abilities that target an area instead of one target","An objective that gives the team that destroys it a massive advantage, usually the first team to take one, ends up winning the game.","1/3/1 - 1 in the top lane, 3 in the middle lane, 1 in the bottom lane. A formation teams usually take to push their advantage.", "A massive amount of damage in a short time","Crowd Control: impairing the movement of enemy characters","Bigger and stronger minions that spawn when an inhibitor is destroyed","Ignoring all objectives and enemy players in order to try and end the game by taking the enemy base (Nexus)."]
+var toolTips = [ {
+	"tool": "snowball",
+	"tip": "gaining and extending a lead until the enemy team cannot stop it. Like a snowball rolling down a mountain"
+}, {
+	"tool": "summoner spell",
+	"tip": "pool of spells that all players can use two of that have nothing to do with the character played. <br/> Flash- teleport a small distance away instantly <br/>Exhaust - slow and lower damage of one enemy <br/>Ghost - Move faster and through other units <br/> <strong>Teleport</strong> - After 4 seconds, teleport to any tower, allied minion, or ward <br/>Ignite - Reduce effectiveness of healing and deal damage over time"
+}, {
+	"tool": "buffs",
+	"tip": "Bonuses given to a character for a duration. Are lost upon death. <br/> Blue buff - Allows characters to use their spells more frequently. <br/> Red buff - Allows characters to slow and burn enemies they attack <br/> Baron Buff - Allows all teammates to gain power and apply power to nearby minions"
+} ];
+// var desc=["gaining and extending a lead until the enemy team cannot stop it. Like a snowball rolling down a mountain","pool of spells that all players can use two of that have nothing to do with the character played. Flash- teleport a small distance away instantly Exhaust - slow and lower damage of one enemy Ghost - Move faster and through other units Teleport - After 4 seconds, teleport to any tower, allied minion, or ward Ignite - Reduce effectiveness of healing and deal damage over time","Bonuses given to a character for a duration. Are lost upon death. Blue buff - Allows characters to use their spells more frequently. Red buff - Allows characters to slow and burn enemies they attack Baron Buff - Allows all teammates to gain power and apply power to nearby minions", "A small trinket that reveals a location on the map for you and your teammates.", "Start of the game, normal positions of 1 in the top side, 1 in the middle, 2 in the bottom and 1 in the jungle.","Score given to players when they deal the finishing blow to a minion. The higher the score, the more gold and more power they have. Perfect cs at 20 minutes is about 200","Dealing the finishing blow","The teleport summoner spell","leaving normal position to go and help a teammate their normal position.","Strongest ability the character has.","Objective that gives extra power to one character for a massive duration when slain.","A pack of minions","In match currency used to buy items that give more strength to characters. Usually the team with more ends up winning. Gold is gained over time and when destroying anything of the enemy’s on the map.","Objective that give a permanent power boost to the team that slays it.","Objects that grant power and gold to the entire team instead of just one player. For example: Towers, Drakes, Inhibitors and Baron","Cooldown Reduction: Allows for players to use their abilities more frequently.","One of the most powerful objectives in the game, teams who take this have a massive advantage for the next five minutes.","Known as 'GA' Revives a champion after he or she dies","When a jungler goes to a lane and attacks the enemy champion with the ally already there","Area of Effect: Abilities that target an area instead of one target","An objective that gives the team that destroys it a massive advantage, usually the first team to take one, ends up winning the game.","1/3/1 - 1 in the top lane, 3 in the middle lane, 1 in the bottom lane. A formation teams usually take to push their advantage.", "A massive amount of damage in a short time","Crowd Control: impairing the movement of enemy characters","Bigger and stronger minions that spawn when an inhibitor is destroyed","Ignoring all objectives and enemy players in order to try and end the game by taking the enemy base (Nexus)."]
 var toolTip = false;
 var tag = document.createElement( 'script' );
 tag.id = 'iframe-demo';
@@ -55,35 +64,36 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady( event ) {
 	console.log( player.getCurrentTime() );
+
 }
 
 
 var myTimer;
 var time;
 
-function checkToolTipTime(time) {
-	if(toolTipTimes.includes(time)){
+function checkToolTipTime( time ) {
+	if ( toolTipTimes.includes( time ) ) {
 		toolsOnDeck--;
-		var toolIndex = toolTipTimes.indexOf(time);
-		var tip=$('<div>').css('background-color', '#08415C');
-		var text=$('<p>').addClass('valign');
-		tip.addClass('row-centered');
-		tip.append(text);
-		tip.css('color', 'white');
-		tip.css('border','black solid 1px');
-		tip.css('height','90px');
-		tip.click(function(index){
-			console.log(toolIndex);
-			console.log(toolTips);
-			$('#toolTipText').css('color','white');
-			$('#toolTipText').html(toolTips[toolIndex].tip);
+		var toolIndex = toolTipTimes.indexOf( time );
+		var tip = $( '<div>' ).css( 'background-color', '#08415C' );
+		var text = $( '<p>' ).addClass( 'valign' );
+		tip.addClass( 'row-centered' );
+		tip.append( text );
+		tip.css( 'color', 'white' );
+		tip.css( 'border', 'black solid 1px' );
+		tip.css( 'height', '90px' );
+		tip.click( function( index ) {
+			console.log( toolIndex );
+			console.log( toolTips );
+			$( '#toolTipText' ).css( 'color', 'white' );
+			$( '#toolTipText' ).html( toolTips[ toolIndex ].tip );
 
-		})
-			$('.learn').prepend(tip)
-		text.html(toolTips[toolIndex].tool);
-		var numTips = $('.learn').children().length
-		if(numTips>8){
-			$('.learn').children().last().remove();
+		} )
+		$( '.learn' ).prepend( tip )
+		text.html( toolTips[ toolIndex ].tool );
+		var numTips = $( '.learn' ).children().length
+		if ( numTips > 8 ) {
+			$( '.learn' ).children().last().remove();
 		}
 
 	}
@@ -93,7 +103,7 @@ function onPlayerStateChange( event ) {
 	if ( event.data === 1 ) {
 		myTimer = setInterval( function() {
 			time = player.getCurrentTime();
-			checkToolTipTime(Math.floor(parseInt(time)));
+			checkToolTipTime( Math.floor( parseInt( time ) ) );
 		}, 1000 )
 	} else {
 		clearInterval( myTimer ); //Stop checking the time if the video isn't playing
@@ -101,6 +111,7 @@ function onPlayerStateChange( event ) {
 }
 
 $( document ).ready( function( e ) {
+	console.log($('.gameNode1').length);
 	//Get tooltipTimes Hopefully will be deprecated soon.
 	$( document ).on( 'keyup', function( e ) {
 		if ( String.fromCharCode( e.keyCode ) === 'T' ) {
@@ -110,7 +121,7 @@ $( document ).ready( function( e ) {
 		}
 	} )
 	$.ajax( {
-		url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=RGAPI-16CCAB70-AECB-4D8D-ADFB-CA39DFE5747E'  ,
+		url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=RGAPI-16CCAB70-AECB-4D8D-ADFB-CA39DFE5747E',
 		success: function( result ) {
 			version = result[ 0 ];
 			console.log( version );
@@ -145,48 +156,54 @@ $( document ).ready( function( e ) {
 				var id = gameChamps[ champClick ];
 				$.ajax( {
 					url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + id + '?champData=image,passive,spells&api_key=RGAPI-16CCAB70-AECB-4D8D-ADFB-CA39DFE5747E',
-				} ).done(function(result){ //For the love of god put this in a helper function
-					console.log(result);
-					newDiv.text(result.name);
-					var row = $('<div></div>')
+				} ).done( function( result ) { //For the love of god put this in a helper function
+					console.log( result );
+					newDiv.text( result.name );
+					var row = $( '<div></div>' )
 					var passive = row.clone();
-					row.addClass('row-centered');
-					passive.addClass('col-sm-2');
-					passive.addClass('col-centered');
+					row.addClass( 'row-centered' );
+					passive.addClass( 'col-sm-2' );
+					passive.addClass( 'col-centered' );
 					var spell0 = passive.clone();
 					var spell1 = passive.clone();
 					var spell2 = passive.clone();
 					var spell3 = passive.clone();
-					var spellDiv=[spell0, spell1, spell2, spell3];
-					passive.append($('<img>', {id:'passive', src:'http://ddragon.leagueoflegends.com/cdn/6.4.1/img/passive/'+result.passive.image.full}).addClass('spell'));
-					for(var i=0; i<spellDiv.length; i++){
-						spellDiv[i].append($('<img>', {id:'spell'+i, src:'http://ddragon.leagueoflegends.com/cdn/6.4.1/img/spell/'+result.spells[i].image.full}).addClass('spell'));
+					var spellDiv = [ spell0, spell1, spell2, spell3 ];
+					passive.append( $( '<img>', {
+						id: 'passive',
+						src: 'http://ddragon.leagueoflegends.com/cdn/6.4.1/img/passive/' + result.passive.image.full
+					} ).addClass( 'spell' ) );
+					for ( var i = 0; i < spellDiv.length; i++ ) {
+						spellDiv[ i ].append( $( '<img>', {
+							id: 'spell' + i,
+							src: 'http://ddragon.leagueoflegends.com/cdn/6.4.1/img/spell/' + result.spells[ i ].image.full
+						} ).addClass( 'spell' ) );
 					}
-					row.addClass('row');
+					row.addClass( 'row' );
 					var spellDescRow = row.clone();
-					spellDescRow.addClass('spellDesc');
-					spellDescRow.css('height','100px');
-					row.append(passive);
-					row.append(spell0);
-					row.append(spell1);
-					row.append(spell2);
-					row.append(spell3);
-					newDiv.append(row);
-					newDiv.append(spellDescRow);
-					newDiv.css('color','white');
-					$('.spell').mouseenter(function(){
-						if($(event.target).attr('id')==='passive'){
-							spellDescRow.append($('<p>'+result.passive.name+'</br>'+result.passive.description+'</p>'))
-						}else{
-							var index=parseInt($(this).attr('id').charAt(5))
-							spellDescRow.append($('<p>'+result.spells[index].name+'</br>'+result.spells[index].description+'</p>'))
+					spellDescRow.addClass( 'spellDesc' );
+					spellDescRow.css( 'height', '100px' );
+					row.append( passive );
+					row.append( spell0 );
+					row.append( spell1 );
+					row.append( spell2 );
+					row.append( spell3 );
+					newDiv.append( row );
+					newDiv.append( spellDescRow );
+					newDiv.css( 'color', 'white' );
+					$( '.spell' ).mouseenter( function() {
+						if ( $( event.target ).attr( 'id' ) === 'passive' ) {
+							spellDescRow.append( $( '<p>' + result.passive.name + '</br>' + result.passive.description + '</p>' ) )
+						} else {
+							var index = parseInt( $( this ).attr( 'id' ).charAt( 5 ) )
+							spellDescRow.append( $( '<p>' + result.spells[ index ].name + '</br>' + result.spells[ index ].description + '</p>' ) )
 						}
-						console.log(parseInt($(this).attr('id').charAt(5)));
-					})
-					$('.spell').mouseleave(function(){
-						spellDescRow.text('');
-					})
-				})
+						console.log( parseInt( $( this ).attr( 'id' ).charAt( 5 ) ) );
+					} )
+					$( '.spell' ).mouseleave( function() {
+						spellDescRow.text( '' );
+					} )
+				} )
 				if ( $( event.target ).hasClass( 'gameNode2' ) ) {
 					newDiv.css( 'background', '#A44A3F' );
 				}
