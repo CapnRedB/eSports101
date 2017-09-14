@@ -110,7 +110,7 @@ $( document ).ready( function( e ) {
 		}
 	} )
 	$.ajax( {
-		url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=RGAPI-16CCAB70-AECB-4D8D-ADFB-CA39DFE5747E'  ,
+		url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=RGAPI-1f0b8fd1-baaf-4fcf-acf1-0ec64909781a'  ,
 		success: function( result ) {
 			version = result[ 0 ];
 			console.log( version );
@@ -144,7 +144,7 @@ $( document ).ready( function( e ) {
 				console.log( champClick );
 				var id = gameChamps[ champClick ];
 				$.ajax( {
-					url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + id + '?champData=image,passive,spells&api_key=RGAPI-16CCAB70-AECB-4D8D-ADFB-CA39DFE5747E',
+					url: 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + id + '?champData=image,passive,spells&api_key=RGAPI-1f0b8fd1-baaf-4fcf-acf1-0ec64909781a',
 				} ).done(function(result){ //For the love of god put this in a helper function
 					console.log(result);
 					newDiv.text(result.name);
