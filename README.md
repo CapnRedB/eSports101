@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+So the Riot API only stays active for a few days and I want to get back into coding and making this look nicer so most of the time the actual API calls to Riot (basically all of the information on the bottom deck) won't be accessible. Don't judge me please :)
 
 * ...
